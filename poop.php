@@ -6,6 +6,7 @@
 <link rel="stylesheet" type="text/css" href="poop.css"/>
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'/>
 <link href='https://fonts.googleapis.com/css?family=Lobster+Two' rel='stylesheet' type='text/css'/>
+<link rel="icon" href="coolpoop.png">
 <title>The Poop Achives</title>
 </head>
 
