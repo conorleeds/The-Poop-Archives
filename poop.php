@@ -6,8 +6,7 @@
 <link rel="stylesheet" type="text/css" href="poop.css"/>
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'/>
 <link href='https://fonts.googleapis.com/css?family=Lobster+Two' rel='stylesheet' type='text/css'/>
-<link rel="icon" href="coolpoop.png">
-<title>The Poop Achives</title>
+<title>Untitled 1</title>
 </head>
 
 <body>
@@ -16,6 +15,7 @@
 
 <div>
 <center><h1 style=" font-size:80px;">The Poop Archives</h1></center>
+<center><h1 style=" font-size:40px;">Finding the perfect poopertunity</h1></center>
 </div>
 
 <?php 
@@ -35,8 +35,7 @@
 		
 		$sql = "SELECT * FROM building;";
 		$result = mysqli_query($conn, $sql);
-		echo mysqli_num_rows($result);
-		echo '<br>';
+
 		
 		while ($row = mysqli_fetch_assoc($result)) {
 			$subsql = "Select * from BATHROOM where location in (select ID from building where name ='" . $row[name] . "');";
@@ -44,9 +43,45 @@
 			echo '<button class="accordion">' . $row['name'] . '</button>';
 			echo '<div class = "panel">';
 			while ($row2 = mysqli_fetch_assoc($result2)) {
-		
-				echo '<button class="accordion">' . $row2['name'] . '</button>';
-
+				$subsq2 = 'Select floor(avg(Rating)) as score from Ratings where Bathroom_ID in(select BATHROOM.ID from BATHROOM where name = "'. $row2['name'] . '");';
+				$result3 = mysqli_query($conn, $subsq2);
+				$subsq3 = 'Select Rating as score from Ratings where Bathroom_ID in(select BATHROOM.ID from BATHROOM where name = "'. $row2['name'] . '");';
+				$result4 = mysqli_query($conn, $subsq3);
+				if(mysqli_num_rows($result4) === 0) {
+					echo '<button class="accordion">' . $row2['name'] . ' Rating:  no ratings  </button>';
+				}else{
+					$row3 = mysqli_fetch_assoc($result3);
+					switch ($row3['score']){
+						case -3:
+							$tag = 'poop-3.png';
+							break;
+						case -2:
+							$tag = 'poop-2.png';
+							break;
+						case -1:
+							$tag = 'poop-1.png';
+							break;
+						case 0:
+							$tag = 'poop.png';
+							break;
+						case 1:
+							$tag = 'poop1.png';
+							break;
+						case 2:
+							$tag = 'poop2.png';
+							break;
+						case 3:
+							$tag = 'poop3.png';
+							break;
+						default:
+							$tag = 'poop1.png';
+						}
+					echo '<button class="accordion">' 
+					.$row2['name'] . "   Rating: "
+					. '<img alt="poop" margin:20px;" src=' 
+					. $tag . ' height="36" width="26"/> </button>';
+					
+				}
 			}
 			echo '</div>';
 			
