@@ -1,9 +1,12 @@
-body{
-	
-
-	
+﻿p{
+	font-family: 'Lobster Two', cursive;
 }
-
+.img:hover{
+	outline-style: solid;
+}
+.img:active{
+	outline-style: solid;
+}
 .content{
 	width:70%;
 	margin:auto;
@@ -55,4 +58,3 @@ div.panel.show {
     opacity: 1;
     max-height: 500px;  
 }
-
